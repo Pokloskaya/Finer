@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %} Inicio {% endblock %}
+
+{% block contenido %}
+   <div class = "col-sm-12 col-md-6 col-lg-8 col-xl-8 ">
+      <h3><strong>COSTO VARIABLE</strong></h3>
+      <div class = "table-responsive py-2 " style="width: 80vw">
+         <table style class = "table table-striped" >
+            <thead>
+               <th>Producto ID</th>
+               <th>Concepto</th>
+               <th>Cantidad de compra</th>
+               <th>Unidad de compra</th>
+               <th>Precio de compra</th>
+               <th>Unidades utilizadas</th>
+               <th>Factor</th>
+               <th>Margen de contribución en pesos</th>
+               <th>Margen de contribución en porcentaje</th>       
+            </thead>
+            <tbody>
+               <ul>
+                  {% for c in COSTO_VARIABLE %}
+                  <tr>
+                  
+                  <td>{{c.producto_id}}</td>
+                  <td>{{c.concepto}}</td>
+                  <td>{{c.unidad_compra}}</td>
+                  <td>{{c.precio_compra}}</td>
+                  <td>{{c.unidades_utilizada}}</td>
+                  <td>{{c.factor}}</td>
+                  <td>{{c.margen_contribucion_peso}}</td>
+                  <td>{{c.margen_contribucion_porcentaje}}</td>
+                  </tr>
+   
+                  {% endfor%}
+               </ul> 
+            </tbody>
+         </table>
+      </div>
+   </div>
+   
+
+
+</div>
+
+{% endblock %}
