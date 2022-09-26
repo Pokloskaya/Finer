@@ -1,10 +1,47 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
 
-{% block title %} Inicio {% endblock %}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"> 
+    <!--^^hacer que la pagina sea responsive--> 
 
-{% block contenido %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'Home.css'%}"> 
+    <!--^^conectar el css con el HTMl-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <!--^^este es el fond, el estilo de letra-->
 
-<h1>HOME</h1>
+</head>
+<body>
+    <section class="header">
+    <!--^^el nombre de la clase de esta seccion-->
+        <nav>
+            <div class="nav-links" id="navLinks">
+                <ul>
+                    <li> <button><a href="/home">Log out </a></button> </li>
+                </ul>
+            </div>
+        </nav>
 
-{% endblock %}
+    <div class="text-box">
+        
+        <h1>Bienvenido, usuario!</h1>
+        <p>
+            En Finer puedes tener todas tus finanzas organizadas <br> ;)
+            <!--- br es un line brake -->
+            
+        </p>
+        <!-- <a href="">Registrate</a>-->
+        <a href="/gestion_producto" class="hero-btn"> Productos</a>
+        <a href="/" class="hero-btn"> Indicadores financieros</a>
+        <a href="/" class="hero-btn"> Costos de la empresa</a>
+        <!-- PARA HACER QUE ESO SE VEA COMO UN BOTON, lo creamos en una clase y con CSS lo hacemos el boton -->
+    </div>
 
+    </section>
+
+
+</body>
+</html>
