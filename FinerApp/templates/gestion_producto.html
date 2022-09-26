@@ -9,16 +9,23 @@
    <h5><strong>GESTIÓN DE PRODUCTOS</strong></h5> 
       <div class ="card">
          <div class= "card-body">
-            <form action="agregar/" method = "POST">{% csrf_token %} 
-               <div class = "form-group">
-                  <input type = "text" id="txtEmpresa" name= "txtEmpresa" class= "form-control" placeholder = "Empresa ID" Required>
+            <form action="" method = "POST">
+               
+               {% csrf_token %} 
+               <div class = "form-group mb-3">
+                  {{form.nombre}}
                </div>
-               <div class = "form-group">
-                  <input type = "text" id="txtCodigo" name= "txtCodigo" class= "form-control" placeholder = "Código" Required>
+               <div class = "form-group mb-3">
+                  {{form.p_v_u}}
                </div>
-               <div class = "form-group">
-                  <input type = "text" id="txtProducto" name= "txtProducto" class= "form-control" placeholder = "Producto" Required>
+               <div class = "form-group mb-3">
+                  {{form.c_v_u}}
                </div>
+
+               <div class="form-group mb-3">
+                  {{form.participacion_ventas}}
+               </div>
+
                <div class = "form-group">
                   <button type= "submit" class= "btn btn-success btn-block text-white">Agregar producto</button>
                </div>  
@@ -33,21 +40,24 @@
       <h3><strong>PRODUCTOS DE LA EMPRESA</strong></h3>
       <div class = "table-responsive py-2 ">
          <table class = "table table-striped" >
+            <caption> Productos de la empresa</caption>
             <thead>
-               <th>Empresa</th>
-               <th>Código</th>
                <th>Producto</th>
-               <th colspan = "2"> Gestiones</th>
+               <th>Costo variable unitario</th>
+               <th>Precio variable unitario</th>
+               <th>Participacion en ventas</th>
+               <th colspan = "2"></th>
             </thead>
             <tbody>
                <ul>
                   {% for p in productos %}
                   <tr>
-                  <td>{{p.empresa_id}}</td>
-                  <td>{{p.producto_id}}</td>
                   <td>{{p.nombre}}</td>
-                  <td><a href = "editar/{{p.producto_id}}" class= "btn btn-info">Editar</a></td>
-                  <td><a href = "eliminar/{{p.producto_id}}" class= "btn btn-danger">Eliminar</a></td>
+                  <td>{{p.p_v_u}}</td>
+                  <td>{{p.c_v_u}}</td>
+                  <td>{{p.participacion_ventas}}</td>
+                  <td><a href = "{% url 'editar_producto' p.id %}" class= "btn btn-info">Editar</a></td>
+                  <td><a href = "{% url 'eliminar_producto' p.id %}" class= "btn btn-danger">Eliminar</a></td>
                   </tr>
                   {% endfor%}
                </ul> 

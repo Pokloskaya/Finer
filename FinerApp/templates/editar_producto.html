@@ -3,8 +3,39 @@
 {% block title %} Inicio {% endblock %}
 
 {% block contenido %}
+
+<div class = "col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-4">
+   <h5><strong>GESTIÓN DE PRODUCTOS</strong></h5> 
+      <div class ="card">
+         <div class= "card-body">
+            <form action=" {% url 'editar_producto' producto.id %}" method = "POST">
+               
+               {% csrf_token %} 
+               <div class = "form-group mb-3">
+                  {{form.nombre}}
+               </div>
+               <div class = "form-group mb-3">
+                  {{form.p_v_u}}
+               </div>
+               <div class = "form-group mb-3">
+                  {{form.c_v_u}}
+               </div>
+
+               <div class="form-group mb-3">
+                  {{form.participacion_ventas}}
+               </div>
+
+               <div class = "form-group">
+                  <button type= "submit" class= "btn btn-success btn-block text-white">Editar Producto</button>
+               </div>  
+            </form> 
+         </div>
+      </div>
+   
+   </div>
+
    <div class = "col-sm-12 col-md-6 col-lg-8 col-xl-8 ">
-      <h3><strong>COSTO VARIABLE</strong></h3>
+      <h3><strong>Conceptos</strong></h3>
       <div class = "table-responsive py-2 " style="width: 80vw">
          <table style class = "table table-striped" >
             <thead>
@@ -13,7 +44,7 @@
                <th>Cantidad de compra</th>
                <th>Unidad de compra</th>
                <th>Precio de compra</th>
-               <th>Unidades utilizadas</th>
+               <th>Unidade</th>
                <th>Factor</th>
                <th>Margen de contribución en pesos</th>
                <th>Margen de contribución en porcentaje</th>       
