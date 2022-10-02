@@ -6,25 +6,35 @@
 
 <div class = "row">
    <div class = "col-sm-12 col-md-6 col-lg-4 col-xl-4 ">
-   <h5><strong>GESTIÓN DE PRODUCTOS COMERCIANTE</strong></h5> 
+   <h5><strong>GESTIÓN DE PRODUCTOS PRODUCTOR</strong></h5> 
       <div class ="card">
          <div class= "card-body">
             <form action="" method = "POST">
                
-               {% csrf_token %} 
+               {% csrf_token %} <!-- seguridad -->
                <div class = "form-group mb-3">
                   {{form.nombre}}
                </div>
                <div class = "form-group mb-3">
-                  {{form.p_v_u}}
+                <input type="text" name="unidad_compra" class="form-control" placeholder="unidad de compra" required="" id="id_unidad_compra">
+
                </div>
                <div class = "form-group mb-3">
-                  {{form.c_v_u}}
+                  {{form.precio_compra}}
                </div>
 
                <div class="form-group mb-3">
-                  {{form.participacion_ventas}}
+                  {{form.tipo_unidad}}
                </div>
+               <div class="form-group mb-3">
+                  {{form.unidad}}
+                </div>
+                <div class="form-group mb-3">
+                  {{form.factor}}
+                </div>
+                <div class="form-group mb-3">
+                  {{form.costo_variable}}
+                </div>
 
                <div class = "form-group">
                   <button type= "submit" class= "btn btn-success btn-block text-white">Agregar producto</button>
@@ -36,26 +46,30 @@
    </div>
 
 
-   <div class = "col-sm-12 col-md-6 col-lg-8 col-xl-8 ">
-      <h3><strong>PRODUCTOS DE LA EMPRESA</strong></h3>
+    <div class = "col-sm-12 col-md-6 col-lg-8 col-xl-8 "> <!-- lo que se sube al forms -->
+      <h3><strong>PRODUCTOS DE LA EMPRESA PRODUCTORA</strong></h3>
       <div class = "table-responsive py-2 ">
          <table class = "table table-striped" >
             <caption> Productos de la empresa</caption>
             <thead>
                <th>Producto</th>
-               <th>Costo variable unitario</th>
-               <th>Precio variable unitario</th>
-               <th>Participacion en ventas</th>
+               <th>unidad_compra</th>
+               <th>precio_compra</th>
+               <th>tipo_unidad</th>
+               <th>unidad</th>
+               <th>factor</th>
                <th colspan = "2"></th>
             </thead>
             <tbody>
                <ul>
-                  {% for p in productos %}
+                  {% for p in conceptos %}
                   <tr>
                   <td>{{p.nombre}}</td>
-                  <td>{{p.p_v_u}}</td>
-                  <td>{{p.c_v_u}}</td>
-                  <td>{{p.participacion_ventas}}</td>
+                  <td>{{p.unidad_compra}}</td>
+                  <td>{{p.precio_compra}}</td>
+                  <td>{{p.tipo_unidad}}</td>
+                  <td>{{p.unidad}}</td>
+                  <td>{{p.factor}}</td>
                   <td><a href = "{% url 'editar_producto' p.id %}" class= "btn btn-info">Editar</a></td>
                   <td><a href = "{% url 'eliminar_producto' p.id %}" class= "btn btn-danger">Eliminar</a></td>
                   </tr>
@@ -72,6 +86,5 @@
 
 
 
-   
 
 {% endblock %}
