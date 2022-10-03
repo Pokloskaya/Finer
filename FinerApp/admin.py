@@ -1,10 +1,8 @@
 from django.contrib import admin
-from .models import EMPRESA
-from .models import TIPO_EMPRESA
-from .models import PRODUCTO
-from .models import COSTO_VARIABLE
+from .models import Empresa
+from .models import Producto
+from .models import Concepto
 # Register your models here.
-admin.site.register(EMPRESA)
-admin.site.register(TIPO_EMPRESA)
-admin.site.register(PRODUCTO)
-admin.site.register(COSTO_VARIABLE)
+admin.site.register(Empresa)
+admin.site.register(Producto)
+admin.site.register(Concepto)

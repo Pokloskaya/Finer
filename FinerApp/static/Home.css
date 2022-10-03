@@ -42,7 +42,7 @@ nav img{
     content: '';
     width: 0%; /*empieza desde cero %*/
     height: 2px;
-    background-color: #f44336;
+    background-color: #3656f4;
     display: block;
     margin: auto;
     transition: 0.5s; /*tiempo de transiciones de cuando les pongo el mouse por encima */
@@ -85,8 +85,8 @@ nav img{
 }
 
 .hero-btn:hover{
-    border: 1px solid #f44336;
-    background: #f44336;
+    border: 1px solid #3656f4;
+    background: #3656f4;
     transition: 1s;
 }
 
@@ -105,7 +105,7 @@ nav .fa{ /*Para que los iconos solo se vean para las pantallas pequenias*/
     }
     .nav-links{
         position: absolute;
-        background: #f44336;
+        background: #3656f4;
         height: 100vh;
         width: 200px;
         top: 0;
