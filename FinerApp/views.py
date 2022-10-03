@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
-from .models import Empresa, Producto,FormProducto
+from django.shortcuts import render, redirect,HttpResponseRedirect
+from .models import Empresa, FormConcepto, Producto,FormProducto,Concepto
 
 # Create your views here.
 def home(request):
@@ -44,7 +44,11 @@ def editar_producto(request, producto_id):
 
    if request.method == 'GET':
 
+      formConcepto = FormConcepto()
+
       form = FormProducto(instance=producto)
+
+      conceptos = Concepto.objects.filter(producto_id=producto_id)
    
    elif request.method == 'POST':
 
@@ -59,8 +63,34 @@ def editar_producto(request, producto_id):
 
          producto.save()
 
+   return render(request, "editar_producto.html",{"producto":producto,'form':form,'formConcepto':formConcepto,'conceptos':conceptos})
+
+def añadir_concepto(request, producto_id):
 
 
-   return render(request, "editar_producto.html",{"producto":producto,'form':form})
+   if request.method == 'POST':
+
+      form = FormConcepto(request.POST)
+
+
+      if form.is_valid():
+
+         concepto = form.save(commit=False)
+
+         concepto.producto_id = Producto.objects.get(id = producto_id)
+
+         concepto.save()
+
+   return redirect(f'http://127.0.0.1:8000/productos/gestion/editar/{producto_id}')
+
+
+         
+
+
+
+
+         
+
+
 
    

@@ -22,11 +22,10 @@ class Producto(models.Model):
    
 class Concepto(models.Model):
    producto_id = models.ForeignKey(Producto, on_delete=models.CASCADE,blank=True)
-   nombre = models.CharField(max_length=50) 
+   nombreConcepto = models.CharField(max_length=50) 
    unidad_compra = models.CharField(max_length=30)
    precio_compra = models.DecimalField(max_digits=10,decimal_places=3)
-   tipo_unidad  = models.CharField(max_length=30)
-   unidad = models.DecimalField(max_digits=10,decimal_places=3,default=0)
+   unidad_ultilizada = models.DecimalField(max_digits=10,decimal_places=3,default=0)
    factor = models.DecimalField(max_digits=10,decimal_places=3,default=0)
    costo_variable = models.DecimalField(max_digits=10,decimal_places=3,default=0)
 
@@ -56,4 +55,37 @@ class FormProducto(forms.ModelForm):
          'p_v_u': forms.TextInput(attrs={'class':'form-control','placeholder':labels['p_v_u']}),
          'participacion_ventas': forms.TextInput(attrs={'class':'form-control','placeholder':labels['participacion_ventas']}),
          
+      }
+
+
+class FormConcepto(forms.ModelForm):
+
+   class Meta:
+      model = Concepto
+
+      fields = [
+         'nombreConcepto',
+         'unidad_compra',
+         'precio_compra',
+         'unidad_ultilizada',
+         'factor',
+         'costo_variable',
+      ]
+
+      labels = {
+         'nombreConcepto': 'Nombre',
+         'unidad_compra': 'Unidad de compra',
+         'precio_compra': 'Precio de compra',
+         'unidad_ultilizada': 'Unidad Ultilizada',
+         'factor': 'factor',
+         'costo_variable':'Costo variable',
+      }
+
+      widgets = {
+         'nombreConcepto':forms.TextInput(attrs={'class':'form-control','placeholder':labels['nombreConcepto']}),
+         'unidad_compra':forms.TextInput(attrs={'class':'form-control','placeholder':labels['unidad_compra']}),
+         'precio_compra': forms.TextInput(attrs={'class':'form-control','placeholder':labels['precio_compra']}),
+         'unidad_ultilizada': forms.TextInput(attrs={'class':'form-control','placeholder':labels['unidad_ultilizada']}),
+         'factor': forms.TextInput(attrs={'class':'form-control','placeholder':labels['factor']}),
+         'costo_variable': forms.TextInput(attrs={'class':'form-control','placeholder':labels['costo_variable']}),
       }
