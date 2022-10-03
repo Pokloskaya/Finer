@@ -5,7 +5,7 @@ from .models import Empresa, FormConcepto, Producto,FormProducto,Concepto
 def home(request):
    return render(request, "home.html")
 
-def home(request):
+def registro(request):
    return render(request, "registro.html")
 
 def gestion_producto(request,empresa_id=1):
