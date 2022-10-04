@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"> 
+    <!--^^hacer que la pagina sea responsive--> 
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'registro.css'%}"> 
+    <!--^^conectar el css con el HTMl-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <!--^^este es el fond, el estilo de letra-->
+
+</head>
+<body>
+
+    <form  action = "" method = "POST">
+        {% csrf_token %}
+        <!--<div class="title">Bienvenido a Finer!</div>
+        <div class="subtitle">Empecemos por registrar tu empresa</div>
+        <div class="input-container ic1">
+        <input id="firstname" class="input" type="text" placeholder=" " />
+        <div class="cut"></div>
+        <label for="firstname" class="placeholder">Nombre de la empresa</label>
+        </div>
+        <div class="input-container ic2">
+        <input id="lastname" class="input" type="text" placeholder=" " />
+        <div class="cut"></div>
+        <label for="lastname" class="placeholder">NIT o documento</label>
+        </div>
+        <div class="input-container ic2">
+        <input id="email" class="input" type="text" placeholder=" " />
+        <div class="cut cut-short"></div>
+        <label for="email" class="placeholder">Tipo de empresa</label> 
+        <div class = "form-group mb-3">
+            {{form.nombre}}
+         </div>-->
+         <table style="color: #fff">{{form.as_table}}</table>
+         <input type = "submit" value="Registrar">
+    </form>
+
+</body>
+</html>  
