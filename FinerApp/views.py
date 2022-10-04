@@ -5,7 +5,10 @@ from .models import Empresa, FormConcepto, Producto,FormProducto,Concepto
 def home(request):
    return render(request, "home.html")
 
-def gestion_producto(request,empresa_id=1):
+def gestion_producto(request,empresa_id=2):
+
+   
+   
 
    if request.method == 'POST':
 
@@ -28,15 +31,15 @@ def gestion_producto(request,empresa_id=1):
 
    form = FormProducto()
 
-   return render(request, "gestion_producto.html", {"productos": productos,'form':form})
+   return render(request, "gestion_producto.html", {"productos": productos,'form':form,'tipoEmpresa':Empresa.objects.get(id=empresa_id).tipo_empresa})
 
 def eliminar_producto(request, producto_id):
-   producto = Producto.objects.get(empresa_id = 1,id = producto_id) 
+   producto = Producto.objects.get(empresa_id = 2,id = producto_id) 
    producto.delete()
    
    return redirect('http://127.0.0.1:8000/productos/')
 
-def editar_producto(request, producto_id):
+def editar_producto(request,producto_id,empresa_id=2):
 
 
    producto = Producto.objects.get(id = producto_id)
@@ -63,7 +66,7 @@ def editar_producto(request, producto_id):
 
          producto.save()
 
-   return render(request, "editar_producto.html",{"producto":producto,'form':form,'formConcepto':formConcepto,'conceptos':conceptos})
+   return render(request, "editar_producto.html",{"producto":producto,'form':form,'formConcepto':formConcepto,'conceptos':conceptos,'tipoEmpresa':Empresa.objects.get(id=empresa_id).tipo_empresa})
 
 def añadir_concepto(request, producto_id):
 
