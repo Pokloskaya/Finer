@@ -1,12 +1,11 @@
 from django.shortcuts import render, redirect,HttpResponseRedirect
-from .models import Empresa, FormConcepto, Producto,FormProducto,Concepto
+from .models import Empresa, FormConcepto, Producto,FormProducto,Concepto, FormEmpresa
 
 # Create your views here.
 def home(request):
    return render(request, "home.html")
 
-def registro(request):
-   return render(request, "registro.html")
+
 
 def gestion_producto(request,empresa_id=1):
 
@@ -86,6 +85,15 @@ def añadir_concepto(request, producto_id):
 
    return redirect(f'http://127.0.0.1:8000/productos/gestion/editar/{producto_id}')
 
+def registro(request):
+       data = {'form': FormEmpresa()}
+       if request.method == 'POST':
+              formulario = FormEmpresa(request.POST)
+              if formulario.is_valid():
+                  formulario.save()
+      
+              
+       return render(request, "registro.html",data)
 
          
 

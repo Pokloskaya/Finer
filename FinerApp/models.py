@@ -1,3 +1,4 @@
+from dataclasses import field
 from django.db import models
 from django import forms
 
@@ -5,7 +6,6 @@ from django import forms
 from . import choices
 
 class Empresa(models.Model):
-
    nombre = models.CharField(max_length=50)
    contraseña = models.CharField(max_length=20)
    tipo_empresa = models.CharField(max_length=20,choices=choices.TIPO_EMPRESAS) #Llave foranea
@@ -29,6 +29,13 @@ class Concepto(models.Model):
    factor = models.DecimalField(max_digits=10,decimal_places=1,default=0)
    costo_variable = models.DecimalField(max_digits=10,decimal_places=1,default=0)
 
+class FormEmpresa(forms.ModelForm):
+   class Meta:
+      model = Empresa
+      
+      fields = ['nombre', 'contraseña', 'tipo_empresa', 'margen_contribucion_negocio']
+      
+       
    
 class FormProducto(forms.ModelForm):
 
