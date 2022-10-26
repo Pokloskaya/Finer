@@ -18,7 +18,25 @@
 
     <form  action = "" method = "POST">
         {% csrf_token %}
-         <table style="color: #fff">{{form.as_table}}</table>
+
+        <div>
+
+            {{form.nombre.label_tag}}
+            {{form.nombre}}
+        </div>
+
+        <div>
+            {{form.contraseña.label_tag}}
+            {{form.contraseña}}
+
+        </div>
+
+
+        <div>
+            {{form.tipo_empresa.label_tag}}
+            {{form.tipo_empresa}}
+        </div>
+ 
          <input type = "submit" value="Registrar">
     </form>
 
