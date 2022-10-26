@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"> 
+    <!--^^hacer que la pagina sea responsive--> 
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'registro.css'%}"> 
+    <!--^^conectar el css con el HTMl-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <!--^^este es el fond, el estilo de letra-->
+
+</head>
+<body>
+
+    <form  action = "" method = "POST">
+        {% csrf_token %}
+         <table style="color: #fff">{{form.as_table}}</table>
+         <input type = "submit" value="Registrar">
+    </form>
+
+</body>
+</html>  

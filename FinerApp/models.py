@@ -29,6 +29,13 @@ class Concepto(models.Model):
    factor = models.DecimalField(max_digits=10,decimal_places=3,default=0)
    costo_variable = models.DecimalField(max_digits=10,decimal_places=3,default=0)
 
+class FormEmpresa(forms.ModelForm):
+   class Meta:
+      model = Empresa
+      
+      fields = ['nombre', 'contraseña', 'tipo_empresa', 'margen_contribucion_negocio']
+      
+
    
 class FormProducto(forms.ModelForm):
 
