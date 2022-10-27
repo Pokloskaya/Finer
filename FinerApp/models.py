@@ -35,7 +35,6 @@ class FormEmpresa(forms.ModelForm):
       
       fields = ['nombre', 'contraseña', 'tipo_empresa', 'margen_contribucion_negocio']
       
-       
    
 class FormProducto(forms.ModelForm):
 
