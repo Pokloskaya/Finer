@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0"> 
-    <!--^^hacer que la pagina sea responsive--> 
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finer</title>
 
     {% load static %}
     <link rel="stylesheet" href="{% static 'Home.css'%}"> 
@@ -15,33 +16,32 @@
 
 </head>
 <body>
+
     <section class="header">
-    <!--^^el nombre de la clase de esta seccion-->
-        <nav>
-            <div class="nav-links" id="navLinks">
-                <ul>
-                    <li> <button><a href="/home">Log out </a></button> </li>
-                </ul>
-            </div>
-        </nav>
+            <nav>
+                <div class="nav-links" id="navLinks">
+                    <ul>
+                        <li> <button><a href="{% url 'registro' %}">Log out </a></button> </li>
+                    </ul>
+                </div>
+            </nav>
 
-    <div class="text-box">
+            <div class="text-box">
+
+                <h1>Bienvenido, usuario!</h1>
+                <p>
+                    En Finer puedes tener todas tus finanzas organizadas <br> ;)
         
-        <h1>Bienvenido, usuario!</h1>
-        <p>
-            En Finer puedes tener todas tus finanzas organizadas <br> ;)
-            <!--- br es un line brake -->
-            
-        </p>
-        <a href="productos/" class="hero-btn"> Productos comerciante</a>
-        <a href="productos/producto_productor" class="hero-btn"> Productos productor</a>
-        <a href="" class="hero-btn"> Indicadores financieros</a>
-        <a href="" class="hero-btn"> Costos de la empresa</a>
-        <!-- PARA HACER QUE ESO SE VEA COMO UN BOTON, lo creamos en una clase y con CSS lo hacemos el boton -->
-    </div>
+                </p>
+                <a href="{% url 'gestion_producto'  %}" class="hero-btn"> Productos</a>
+                <a href="/" class="hero-btn"> Indicadores financieros</a>
+                <a href="/" class="hero-btn"> Costos fijos </a>
 
-    </section>
+            </div>
 
+        </section>
 
+    
+    
 </body>
 </html>

@@ -33,7 +33,7 @@ class FormEmpresa(forms.ModelForm):
    class Meta:
       model = Empresa
       
-      fields = ['nombre', 'contraseña', 'tipo_empresa', 'margen_contribucion_negocio']
+      fields = ['nombre', 'contraseña', 'tipo_empresa']
       
    
 class FormProducto(forms.ModelForm):
