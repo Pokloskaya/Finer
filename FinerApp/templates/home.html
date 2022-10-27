@@ -18,11 +18,10 @@
 <body>
 
     <section class="header">
-        <!--^^el nombre de la clase de esta seccion-->
             <nav>
                 <div class="nav-links" id="navLinks">
                     <ul>
-                        <li> <button><a href="/home">Log out </a></button> </li>
+                        <li> <button><a href="{% url 'registro' %}">Log out </a></button> </li>
                     </ul>
                 </div>
             </nav>
@@ -32,14 +31,12 @@
                 <h1>Bienvenido, usuario!</h1>
                 <p>
                     En Finer puedes tener todas tus finanzas organizadas <br> ;)
-                    <!--- br es un line brake -->
         
                 </p>
-                <!-- <a href="">Registrate</a>-->
-                <a href="/gestion_producto" class="hero-btn"> Productos</a>
+                <a href="{% url 'gestion_producto'  %}" class="hero-btn"> Productos</a>
                 <a href="/" class="hero-btn"> Indicadores financieros</a>
-                <a href="/" class="hero-btn"> Costos de la empresa</a>
-                <!-- PARA HACER QUE ESO SE VEA COMO UN BOTON, lo creamos en una clase y con CSS lo hacemos el boton -->
+                <a href="/" class="hero-btn"> Costos fijos </a>
+
             </div>
 
         </section>
