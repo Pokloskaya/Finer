@@ -6,7 +6,7 @@ from .models import Empresa, FormConcepto, Producto,FormProducto,Concepto,FormEm
 def home(request):
    return render(request, "home.html")
 
-def gestion_producto(request,empresa_id=2):
+def gestion_producto(request,empresa_id=1):
 
    
    
@@ -35,10 +35,17 @@ def gestion_producto(request,empresa_id=2):
    return render(request, "gestion_producto.html", {"productos": productos,'form':form,'tipoEmpresa':Empresa.objects.get(id=empresa_id).tipo_empresa})
 
 def eliminar_producto(request, producto_id):
-   producto = Producto.objects.get(empresa_id = 2,id = producto_id) 
+   producto = Producto.objects.get(empresa_id = 1,id = producto_id) 
    producto.delete()
    
-   return redirect('http://127.0.0.1:8000/productos/')
+def eliminar_costo(request, costo_id):
+   
+   costo = Costos.objects.get(empresa_id = 1,id = costo_id) 
+   costo.delete()
+   
+   
+   
+   return redirect("/costosfijos")
 
 def editar_producto(request,producto_id,empresa_id=1):
    
@@ -116,25 +123,28 @@ def registro(request):
 
 def costos_fijos(request,empresa_id=1):
 
-   
-   
-   if request.method == 'GET':
       
-      costos = Costos.objects.filter(empresa_id=empresa_id)
-      formCostos = FormCostos()
+   if request.method == 'POST':
       
       
+      costo = FormCostos(request.POST)
       
       
+      if costo.is_valid():
+         
+         
+         costo = costo.save(commit=False)
+         
+         costo.empresa_id = Empresa.objects.get(id=empresa_id)
+         
+         
+         costo.save()
+   
+         
+   costos = Costos.objects.filter(empresa_id=empresa_id)
+   formCostos = FormCostos()
+         
       
-      
-      
-   
-   
-   
-   
-   
-   
    
    return render(request,"costosfijos.html",{'costos':costos,'formCostos':formCostos})
 
