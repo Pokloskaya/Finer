@@ -23,8 +23,6 @@
                   <div class = "form-group mb-3">
                      {%if tipoEmpresa == 'comerciante'%}
                      {{form.c_v_u}}
-                     {% else %}
-                     Costo variable unitario
                      {% endif %}
                   </div>
    
@@ -110,6 +108,7 @@
                   <td>{{c.unidad_ultilizada}}</td>
                   <td>{{c.factor}}</td>
                   <td>{{c.costo_variable}}</td>
+                  <td><a href = "{% url 'eliminar_concepto' c.id %}" class= "btn btn-danger">Eliminar</a></td>
                   </tr>
    
                   {% endfor%}

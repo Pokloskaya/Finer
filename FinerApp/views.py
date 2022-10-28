@@ -1,6 +1,7 @@
 from re import A
 from django.shortcuts import render, redirect,HttpResponseRedirect
-from .models import Empresa, FormConcepto, Producto,FormProducto,Concepto,FormEmpresa, Costos,FormCostos
+from .models import Empresa, Producto,Concepto, Costos
+from .forms import FormEmpresa,FormCostos,FormConcepto,FormProducto
 
 # Create your views here.
 def home(request):
@@ -8,7 +9,7 @@ def home(request):
 
 def gestion_producto(request,empresa_id=1):
 
-   
+   tipoEmpresa = Empresa.objects.get(id=empresa_id).tipo_empresa
    
 
    if request.method == 'POST':
@@ -16,12 +17,20 @@ def gestion_producto(request,empresa_id=1):
       form = FormProducto(request.POST)
 
       if form.is_valid():
+         
+         c_v_U = form.cleaned_data['c_v_u']
+         
+         
+         
+         if tipoEmpresa == "productor":
+            
+            c_v_U = 0
 
          producto = Producto.objects.create(
 
          empresa_id = Empresa.objects.get(id=empresa_id),
          nombre = form.cleaned_data['nombre'],
-         c_v_u = form.cleaned_data['c_v_u'], 
+         c_v_u = c_v_U,
          p_v_u = form.cleaned_data['p_v_u'],
          participacion_ventas = form.cleaned_data['participacion_ventas'])
 
@@ -38,12 +47,12 @@ def eliminar_producto(request, producto_id):
    producto = Producto.objects.get(empresa_id = 1,id = producto_id) 
    producto.delete()
    
+   return redirect("/productos")
+   
 def eliminar_costo(request, costo_id):
    
    costo = Costos.objects.get(empresa_id = 1,id = costo_id) 
    costo.delete()
-   
-   
    
    return redirect("/costosfijos")
 
@@ -76,14 +85,23 @@ def editar_producto(request,producto_id,empresa_id=1):
 
       form = FormProducto(request.POST)
 
-      if form.is_valid():
+      if form.has_changed() and form.is_valid():
+         
+         if tipoEmpresa == 'productor':
+            c_v_u = 0
+         elif tipoEmpresa == 'comerciante':
+            c_v_u = form.cleaned_data['c_v_u']
+         
+         
 
          producto.nombre = form.cleaned_data['nombre']
-         producto.c_v_u = form.cleaned_data['c_v_u'] 
+         producto.c_v_u = c_v_u
          producto.p_v_u = form.cleaned_data['p_v_u']
          producto.participacion_ventas = form.cleaned_data['participacion_ventas']
 
          producto.save()
+         
+      return redirect(f"/productos/editar/{producto_id}")
          
    data['form'] = FormProducto(instance=producto)
       
@@ -107,6 +125,9 @@ def añadir_concepto(request, producto_id):
          concepto.producto_id = Producto.objects.get(id = producto_id)
 
          concepto.save()
+      else:
+         
+         print(form.errors)
 
    return redirect(f'/productos/editar/{producto_id}')
 
@@ -147,6 +168,20 @@ def costos_fijos(request,empresa_id=1):
       
    
    return render(request,"costosfijos.html",{'costos':costos,'formCostos':formCostos})
+
+
+
+def eliminar_concepto(concepto_id):
+   
+   concepto = Concepto.objects.get(id=concepto_id)
+   
+   productoid = concepto.producto_id
+   
+   concepto.delete()
+   
+   return redirect(f"/productos/editar/{productoid}")
+   
+   
 
 
          
