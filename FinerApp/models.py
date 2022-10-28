@@ -96,3 +96,27 @@ class FormConcepto(forms.ModelForm):
          'factor': forms.TextInput(attrs={'class':'form-control','placeholder':labels['factor']}),
          'costo_variable': forms.TextInput(attrs={'class':'form-control','placeholder':labels['costo_variable']}),
       }
+      
+class Costos(models.Model):
+   empresa_id = models.ForeignKey(Empresa, on_delete=models.CASCADE) #Llave foranea 
+   nombreCosto = models.CharField(max_length=50)
+   valorCosto = models.DecimalField(max_digits=10,decimal_places=1)
+      
+class FormCostos(forms.ModelForm):
+      class Meta:
+         model = Costos
+
+         fields = [
+            'nombreCosto',
+            'valorCosto',
+         ]
+
+         labels = {
+            'nombreCosto': 'costo',
+            'valorCosto': 'valor del costo',
+         }
+
+         widgets = {
+            'nombreCosto':forms.TextInput(attrs={'class':'form-control','placeholder':labels['nombreCosto']}),
+            'valorCosto':forms.TextInput(attrs={'class':'form-control','placeholder':labels['valorCosto']}),
+         }

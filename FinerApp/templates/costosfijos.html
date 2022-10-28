@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %} Inicio {% endblock %}
+
+
+
+
+
+{%block contenido %}
+
+
+
+<div class = "row">
+    <div class = "col-sm-12 col-md-6 col-lg-4 col-xl-4 ">
+    <h5><strong>Costos fijos de la empresea</strong></h5> 
+       <div class ="card">
+          <div class= "card-body">
+             <form action="" method = "POST">
+                
+                {% csrf_token %} 
+                <div class = "form-group mb-3">
+                   {{formCostos.nombreCosto}}
+                </div>
+                <div class = "form-group mb-3">
+                   {{formCostos.valorCosto}}
+                </div>
+                <div class = "form-group">
+                   <button type= "submit" class= "btn btn-success btn-block text-white">Agregar producto</button>
+                </div>  
+             </form> 
+          </div>
+       </div>
+    
+    </div>
+ 
+ 
+ 
+ 
+    <div class = "col-sm-12 col-md-6 col-lg-8 col-xl-8 ">
+       <h3><strong>Costo fijos<strong></h3>
+       <div class = "table-responsive py-2 ">
+          <table class = "table table-striped" >
+             <caption>COstos fijos de la empresa/caption>
+             <thead>
+                <th>Nombre</th>
+                <th>Valor</th>
+                <th colspan = "2"></th>
+             </thead>
+             <tbody>
+                <ul>
+                   {% for c in costos %}
+                   <tr>
+                   <td>{{c.nombreCosto}}</td>
+                   <td>{{c.valorCosto}}</td>
+                   <td><a href = "{% url 'editar_producto' p.id %}" class= "btn btn-info">Editar</a></td>
+                   <td><a href = "{% url 'eliminar_producto' p.id %}" class= "btn btn-danger">Eliminar</a></td>
+                   </tr>
+                   {% endfor%}
+                </ul> 
+             </tbody>
+          </table>
+       </div>
+    </div>
+    
+ 
+ 
+ </div>
+{% endblock %}
+
+

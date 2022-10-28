@@ -1,5 +1,6 @@
+from re import A
 from django.shortcuts import render, redirect,HttpResponseRedirect
-from .models import Empresa, FormConcepto, Producto,FormProducto,Concepto,FormEmpresa
+from .models import Empresa, FormConcepto, Producto,FormProducto,Concepto,FormEmpresa, Costos,FormCostos
 
 # Create your views here.
 def home(request):
@@ -39,20 +40,31 @@ def eliminar_producto(request, producto_id):
    
    return redirect('http://127.0.0.1:8000/productos/')
 
-def editar_producto(request,producto_id,empresa_id=2):
-
-
-   producto = Producto.objects.get(id = producto_id)
-
-
-   if request.method == 'GET':
-
-      formConcepto = FormConcepto()
-
-      form = FormProducto(instance=producto)
-
-      conceptos = Concepto.objects.filter(producto_id=producto_id)
+def editar_producto(request,producto_id,empresa_id=1):
    
+      
+   tipoEmpresa = Empresa.objects.get(id=empresa_id).tipo_empresa
+   
+   producto = Producto.objects.get(id = producto_id)
+   
+
+   
+   
+   data = {"producto":producto,'tipoEmpresa':tipoEmpresa}
+   
+   
+   if request.method == 'GET':
+      
+      if tipoEmpresa == 'productor':
+         
+         conceptos = Concepto.objects.filter(producto_id=producto_id)
+         
+         formConcepto = FormConcepto()        
+         
+         data['conceptos'] = conceptos
+         data['formConcepto'] = formConcepto
+      
+      
    elif request.method == 'POST':
 
       form = FormProducto(request.POST)
@@ -65,8 +77,13 @@ def editar_producto(request,producto_id,empresa_id=2):
          producto.participacion_ventas = form.cleaned_data['participacion_ventas']
 
          producto.save()
+         
+   data['form'] = FormProducto(instance=producto)
+      
+      
+               
 
-   return render(request, "editar_producto.html",{"producto":producto,'form':form,'formConcepto':formConcepto,'conceptos':conceptos,'tipoEmpresa':Empresa.objects.get(id=empresa_id).tipo_empresa})
+   return render(request, "editar_producto.html",data)
 
 def añadir_concepto(request, producto_id):
 
@@ -84,7 +101,7 @@ def añadir_concepto(request, producto_id):
 
          concepto.save()
 
-   return redirect(f'http://127.0.0.1:8000/productos/gestion/editar/{producto_id}')
+   return redirect(f'/productos/editar/{producto_id}')
 
 def registro(request):
        data = {'form': FormEmpresa()}
@@ -92,9 +109,34 @@ def registro(request):
               formulario = FormEmpresa(request.POST)
               if formulario.is_valid():
                   formulario.save()
-      
+              
               
        return render(request, "registro.html",data)
+
+
+def costos_fijos(request,empresa_id=1):
+
+   
+   
+   if request.method == 'GET':
+      
+      costos = Costos.objects.filter(empresa_id=empresa_id)
+      formCostos = FormCostos()
+      
+      
+      
+      
+      
+      
+      
+   
+   
+   
+   
+   
+   
+   
+   return render(request,"costosfijos.html",{'costos':costos,'formCostos':formCostos})
 
 
          
