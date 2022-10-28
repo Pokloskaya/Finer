@@ -163,23 +163,40 @@ def costos_fijos(request,empresa_id=1):
    
          
    costos = Costos.objects.filter(empresa_id=empresa_id)
+   
+   sumCostos = obtenerCostoTotalEmpresa()
    formCostos = FormCostos()
          
-      
    
-   return render(request,"costosfijos.html",{'costos':costos,'formCostos':formCostos})
+   return render(request,"costosfijos.html",{'costos':costos,'formCostos':formCostos,'costosTotales':sumCostos})
 
 
 
-def eliminar_concepto(concepto_id):
+def eliminar_concepto(request,concepto_id):
+   
+
    
    concepto = Concepto.objects.get(id=concepto_id)
    
-   productoid = concepto.producto_id
+   productoid = concepto.producto_id.empresa_id
    
    concepto.delete()
    
    return redirect(f"/productos/editar/{productoid}")
+
+
+def obtenerCostoTotalEmpresa():
+   
+   amounts = Costos.objects.values_list('valorCosto', flat=True)
+   total = sum(amounts)
+   
+   return total
+
+
+
+
+
+   
    
    
 
