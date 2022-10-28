@@ -1,6 +1,8 @@
+from distutils import errors
 from django.shortcuts import render, redirect,HttpResponseRedirect
 from .models import Empresa, FormConcepto, Producto,FormProducto,Concepto
-
+from django.core.exceptions import ValidationError
+from django.contrib import messages
 # Create your views here.
 def home(request):
    return render(request, "home.html")
@@ -8,7 +10,41 @@ def home(request):
 def registro(request):
    return render(request, "registro.html")
 
-def gestion_producto(request,empresa_id=1):
+def costos(request, empresa_id=1):
+   if request.method == 'POST':
+    
+      form = FormProducto(request.POST)
+
+      if form.is_valid():
+
+         producto = Producto.objects.create(
+
+         empresa_id = Empresa.objects.get(id=empresa_id),
+         nombre = form.cleaned_data['nombre'],
+         c_v_u = form.cleaned_data['c_v_u'], 
+         p_v_u = form.cleaned_data['p_v_u'],
+         participacion_ventas = form.cleaned_data['participacion_ventas'])
+
+         
+         producto.save()
+         messages.success(request, 'producto añadido correctamente')
+
+      else:
+         print(form.errors)
+         if(not form.errors):
+            messages.success(request, 'Producto ya registrado')
+         
+         # raise ValidationError(('Producto ya se encuentra registrado'))
+
+
+   productos = Producto.objects.filter(empresa_id=empresa_id)
+
+   form = FormProducto()
+
+   return render(request, "costos.html", {"productos": productos,'form':form})      
+
+
+def gestion_producto(request,empresa_id=1): #donde se ven los productos registrados
 
    if request.method == 'POST':
 
@@ -24,7 +60,16 @@ def gestion_producto(request,empresa_id=1):
          p_v_u = form.cleaned_data['p_v_u'],
          participacion_ventas = form.cleaned_data['participacion_ventas'])
 
+         
          producto.save()
+         messages.success(request, 'producto añadido correctamente')
+
+      else:
+         print(form.errors)
+         if(not form.errors):
+            messages.success(request, 'Producto ya registrado')
+         
+         # raise ValidationError(('Producto ya se encuentra registrado'))
 
 
    productos = Producto.objects.filter(empresa_id=empresa_id)

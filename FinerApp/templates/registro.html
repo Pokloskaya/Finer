@@ -19,20 +19,30 @@
     <div class="form">
         <div class="title">Bienvenido a Finer!</div>
         <div class="subtitle">Empecemos por registrar tu empresa</div>
+
         <div class="input-container ic1">
         <input id="firstname" class="input" type="text" placeholder=" " />
         <div class="cut"></div>
         <label for="firstname" class="placeholder">Nombre de la empresa</label>
         </div>
+        
         <div class="input-container ic2">
         <input id="lastname" class="input" type="text" placeholder=" " />
         <div class="cut"></div>
         <label for="lastname" class="placeholder">NIT o documento</label>
         </div>
+        
+
+        <!-- tipoEmpresa -->
         <div class="input-container ic2">
         <input id="email" class="input" type="text" placeholder=" " />
         <div class="cut cut-short"></div>
-        <label for="email" class="placeholder">Tipo de empresa</> <!--creo que aquí hay un error -->
+        <!-- <label for="email" class="placeholder">Tipo de empresa</> creo que aquí hay un error -->
+            <select name="tipoEmpresa" id="tipoEmpresa">
+                <option value="" disable selected> Escoge una opcion</option>
+                <option value="productora">Productora</option>
+                <option value="comerciante">Comerciante</option>
+            </select>
         </div>
         <button type="text" class="submit">registrar</button>
     </div>

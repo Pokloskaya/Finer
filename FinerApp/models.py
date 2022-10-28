@@ -1,6 +1,6 @@
 from django.db import models
 from django import forms
-
+from django.core.exceptions import ValidationError
 
 from . import choices
 
@@ -13,13 +13,15 @@ class Empresa(models.Model):
          
 class Producto(models.Model):
    empresa_id = models.ForeignKey(Empresa, on_delete=models.CASCADE) #Llave foranea 
-   nombre = models.CharField(max_length=30)
+
+   nombre = models.CharField(max_length=30, unique=True) #  unique=True
+
    c_v_u = models.DecimalField(max_digits=10,decimal_places=1)  # Esto se puede calcular con base en el costo de los conceptos asociados 
    p_v_u = models.DecimalField(max_digits=10,decimal_places=1)
    participacion_ventas = models.DecimalField(max_digits=10,decimal_places=1)
    margen_contribucion = models.DecimalField(max_digits=10,decimal_places=1,default=0)
    
-   
+
 class Concepto(models.Model):
    producto_id = models.ForeignKey(Producto, on_delete=models.CASCADE,blank=True)
    nombreConcepto = models.CharField(max_length=50) 
@@ -29,7 +31,12 @@ class Concepto(models.Model):
    factor = models.DecimalField(max_digits=10,decimal_places=1,default=0)
    costo_variable = models.DecimalField(max_digits=10,decimal_places=1,default=0)
 
-   
+class Costos(models.Model):
+   empresa_id = models.ForeignKey(Empresa, on_delete=models.CASCADE) #Llave foranea 
+   nombreCosto = models.CharField(max_length=50)
+   valorCosto = models.DecimalField(max_digits=10,decimal_places=1)
+
+#------------------------------------------------------------------------------------------------------------------------------
 class FormProducto(forms.ModelForm):
 
    class Meta:
@@ -42,7 +49,7 @@ class FormProducto(forms.ModelForm):
          'participacion_ventas',
       ]
 
-      labels = {
+      labels = { #el nombre que se le va a mostrar al usuario
          'nombre': 'Nombre',
          'c_v_u': 'Costo variable unitario',
          'p_v_u': 'Precio variable unitario',
@@ -56,6 +63,13 @@ class FormProducto(forms.ModelForm):
          'participacion_ventas': forms.TextInput(attrs={'class':'form-control','placeholder':labels['participacion_ventas']}),
          
       }
+
+      # def verificarDatos(self):
+      #       nombre = self.cleaned_data('nombre')
+
+      #       if Producto.objects.filter(nombre__iexact=nombre).exists(): #si el nombre se encuentra ya ingresado
+      #          raise models.ValidationError('Producto ya se encuentra registrado')
+      #       return nombre
 
 
 class FormConcepto(forms.ModelForm):
@@ -89,3 +103,22 @@ class FormConcepto(forms.ModelForm):
          'factor': forms.TextInput(attrs={'class':'form-control','placeholder':labels['factor']}),
          'costo_variable': forms.TextInput(attrs={'class':'form-control','placeholder':labels['costo_variable']}),
       }
+
+class FormCostos(forms.ModelForm):
+      class Meta:
+         model = Costos
+
+         fields = [
+            'nombreCosto',
+            'valorCosto',
+         ]
+
+         labels = {
+            'nombreCosto': 'costo',
+            'valorCosto': 'valor del costo',
+         }
+
+         widgets = {
+            'nombreCosto':forms.TextInput(attrs={'class':'form-control','placeholder':labels['nombreCosto']}),
+            'valorCosto':forms.TextInput(attrs={'class':'form-control','placeholder':labels['valorCosto']}),
+         }
