@@ -10,8 +10,6 @@ def home(request):
 def gestion_producto(request,empresa_id=1):
 
    tipoEmpresa = Empresa.objects.get(id=empresa_id).tipo_empresa
-   
-
    if request.method == 'POST':
 
       form = FormProducto(request.POST)
@@ -20,14 +18,9 @@ def gestion_producto(request,empresa_id=1):
          
          c_v_U = form.cleaned_data['c_v_u']
          
-         
-         
          if tipoEmpresa == "productor":
-            
             c_v_U = 0
-
-         producto = Producto.objects.create(
-
+         producto = Producto.objects.create( 
          empresa_id = Empresa.objects.get(id=empresa_id),
          nombre = form.cleaned_data['nombre'],
          c_v_u = c_v_U,
@@ -62,10 +55,7 @@ def editar_producto(request,producto_id,empresa_id=1):
    tipoEmpresa = Empresa.objects.get(id=empresa_id).tipo_empresa
    
    producto = Producto.objects.get(id = producto_id)
-   
-
-   
-   
+      
    data = {"producto":producto,'tipoEmpresa':tipoEmpresa}
    
    
@@ -111,23 +101,33 @@ def editar_producto(request,producto_id,empresa_id=1):
    return render(request, "editar_producto.html",data)
 
 def añadir_concepto(request, producto_id):
+       
+          
+   tipoEmpresa = Empresa.objects.get(id=1).tipo_empresa
+   
+   producto = Producto.objects.get(id = producto_id)
+      
+   
+   cvuTemp = producto.c_v_u
+   
 
 
    if request.method == 'POST':
 
-      form = FormConcepto(request.POST)
+      formConcepto = FormConcepto(request.POST)
 
 
-      if form.is_valid():
-
-         concepto = form.save(commit=False)
-
+      if formConcepto.is_valid():
+         concepto = formConcepto.save(commit=False)
          concepto.producto_id = Producto.objects.get(id = producto_id)
-
          concepto.save()
+        
+         producto.c_v_u = cvuTemp + concepto.costo_variable
+         producto.save()
       else:
-         
-         print(form.errors)
+         print(formConcepto.errors)
+      
+      
 
    return redirect(f'/productos/editar/{producto_id}')
 
@@ -142,7 +142,7 @@ def registro(request):
        return render(request, "registro.html",data)
 
 
-def costos_fijos(request,empresa_id=1):
+def costos_fijos(request,empresa_id=2):
 
       
    if request.method == 'POST':
@@ -174,11 +174,14 @@ def costos_fijos(request,empresa_id=1):
 
 def eliminar_concepto(request,concepto_id):
    
-
-   
    concepto = Concepto.objects.get(id=concepto_id)
+   producto =  concepto.producto_id
    
-   productoid = concepto.producto_id.empresa_id
+   productoid = producto.id
+   cvuTemp = producto.c_v_u
+   producto.c_v_u = cvuTemp - concepto.costo_variable
+   producto.save()
+      
    
    concepto.delete()
    
