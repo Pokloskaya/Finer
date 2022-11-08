@@ -63,8 +63,7 @@ def editar_producto(request,producto_id,empresa_id=1):
       
       if tipoEmpresa == 'productor':
          
-         conceptos = Concepto.objects.filter(producto_id=producto_id)
-         
+         conceptos = Concepto.objects.filter(producto_id=producto_id)      
          formConcepto = FormConcepto()        
          
          data['conceptos'] = conceptos
