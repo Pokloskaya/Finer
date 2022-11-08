@@ -1,7 +1,6 @@
 from django.db import models
 from django import forms
 
-
 from . import choices
 
 class Empresa(models.Model):
@@ -19,7 +18,7 @@ class Producto(models.Model):
    participacion_ventas = models.DecimalField(max_digits=10,decimal_places=1)
    margen_contribucion = models.DecimalField(max_digits=10,decimal_places=1,default=0)
    
-   
+
 class Concepto(models.Model):
    producto_id = models.ForeignKey(Producto, on_delete=models.CASCADE,blank=True)
    nombreConcepto = models.CharField(max_length=50) 
@@ -28,42 +27,14 @@ class Concepto(models.Model):
    unidad_ultilizada = models.DecimalField(max_digits=10,decimal_places=1,default=0)
    factor = models.DecimalField(max_digits=10,decimal_places=1,default=0)
    costo_variable = models.DecimalField(max_digits=10,decimal_places=1,default=0)
-
-
    
-
-      
 class Costos(models.Model):
    empresa_id = models.ForeignKey(Empresa, on_delete=models.CASCADE) #Llave foranea 
    nombreCosto = models.CharField(max_length=50)
    valorCosto = models.DecimalField(max_digits=10,decimal_places=1)
    
-   
+#------------------------------------------------------------------------------------
 class Cfu(models.Model):
    diasLaboradosAnuales = models.DecimalField(max_digits=10,decimal_places=1)
    jornadaDiara = models.DecimalField(max_digits=10,decimal_places=1)
    empleadosParticipacion = models.DecimalField(max_digits=10,decimal_places=1)   
-
-
-class FormCfu(forms.ModelForm):
-      class Meta:
-         model = Cfu
-
-         fields = [
-            'diasLaboradosAnuales',
-            'jornadaDiara',
-            'empleadosParticipacion',
-         ]
-
-         labels = {
-            'diasLaboradosAnuales': 'dias laborados anualmente',
-            'jornadaDiara': 'Jornada diaria',
-            'empleadosParticipacion': 'Jornada real de trabajo diario',
-         }
-
-         widgets = {
-            'diasLaboradosAnuales':forms.TextInput(attrs={'class':'form-control','placeholder':labels['diasLaboradosAnuales']}),
-            'jornadaDiara':forms.TextInput(attrs={'class':'form-control','placeholder':labels['jornadaDiara']}),
-            'empleadosParticipacion':forms.TextInput(attrs={'class':'form-control','placeholder':labels['empleadosParticipacion']}),
-         }
-      

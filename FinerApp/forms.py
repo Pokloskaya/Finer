@@ -1,11 +1,13 @@
 import imp
-from .models import Producto,Concepto,Costos,Empresa
+# from django.contrib import admin
+
+from .models import Producto,Concepto,Costos,Empresa, Cfu
 from django import forms
 
+#  admin.site.register(Costos)
+#  admin.site.register(Cfu)
 class FormProducto(forms.ModelForm):
     
-
-
    class Meta:
       model = Producto
 
@@ -27,8 +29,7 @@ class FormProducto(forms.ModelForm):
          'nombre':forms.TextInput(attrs={'class':'form-control','placeholder':labels['nombre']}),
          'c_v_u':forms.TextInput(attrs={'class':'form-control','placeholder':labels['c_v_u']}),
          'p_v_u': forms.TextInput(attrs={'class':'form-control','placeholder':labels['p_v_u']}),
-         'participacion_ventas': forms.TextInput(attrs={'class':'form-control','placeholder':labels['participacion_ventas']}),
-         
+         'participacion_ventas': forms.TextInput(attrs={'class':'form-control','placeholder':labels['participacion_ventas']}),    
       }
 
 
@@ -90,4 +91,26 @@ class FormCostos(forms.ModelForm):
          widgets = {
             'nombreCosto':forms.TextInput(attrs={'class':'form-control','placeholder':labels['nombreCosto']}),
             'valorCosto':forms.TextInput(attrs={'class':'form-control','placeholder':labels['valorCosto']}),
+         }
+
+class FormCfu(forms.ModelForm):
+      class Meta:
+         model = Cfu
+
+         fields = [
+            'diasLaboradosAnuales',
+            'jornadaDiara',
+            'empleadosParticipacion',
+         ]
+
+         labels = {
+            'diasLaboradosAnuales': 'dias laborados anualmente',
+            'jornadaDiara': 'Jornada diaria',
+            'empleadosParticipacion': 'Jornada real de trabajo diario',
+         }
+
+         widgets = {
+            'diasLaboradosAnuales':forms.TextInput(attrs={'class':'form-control','placeholder':labels['diasLaboradosAnuales']}),
+            'jornadaDiara':forms.TextInput(attrs={'class':'form-control','placeholder':labels['jornadaDiara']}),
+            'empleadosParticipacion':forms.TextInput(attrs={'class':'form-control','placeholder':labels['empleadosParticipacion']}),
          }

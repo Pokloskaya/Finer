@@ -1,53 +1,51 @@
 {% extends "base.html" %}
-{% block title %} Productos Finer {% endblock %}
+{% block title %} Indicadores Finer {% endblock %}
 {% block contenido %}
 
 <div class = "row">
    <div class = "col-sm-12 col-md-6 col-lg-4 col-xl-4 ">
-   <h5><strong>GESTIÓN DE PRODUCTOS</strong></h5> 
+   <h5><strong>CALCULAR COSTOS FIJOS UNITARIOS</strong></h5> 
       <div class ="card">
          <div class= "card-body">
             <form action="" method = "POST">
                
                {% csrf_token %} 
                <div class = "form-group mb-3">
-                  {{form.nombre}}
+                  {{form.diasLaboradosAnuales}}
                </div>
                <div class = "form-group mb-3">
-                  {{form.p_v_u}}
+                  {{form.jornadaDiara}}
                </div>
                <div class = "form-group mb-3">
-                  {% if tipoEmpresa == 'comerciante' %}
-                  {{form.c_v_u}}
-                  {% endif %}
-               </div>
-
-               <div class="form-group mb-3">
-                  {{form.participacion_ventas}}
+                  {{form.empleadosParticipacion}}
                </div>
 
                <div class = "form-group">
-                  <button type= "submit" class= "btn btn-success btn-block text-white">Agregar producto</button>
+                  <button type= "submit" class= "btn btn-success btn-block text-white">Agregar datos</button>
                </div>  
+
+               <div>
+                <h5>
+                   Informacion prueba: {{prueba}}
+                </h5>
+              </div>
+
             </form> 
          </div>
       </div>
-   
    </div>
 
 
-
-
-   <div class = "col-sm-12 col-md-6 col-lg-8 col-xl-8 ">
-      <h3><strong>PRODUCTOS DE LA EMPRESA</strong></h3>
+   <div class = "col-sm-12 col-md-6 col-lg-8 col-xl-8">
+      <h3><strong>Informacion productiva de la empresa</strong></h3>
       <div class = "table-responsive py-2 ">
          <table class = "table table-striped" >
-            <caption> Productos de la empresa</caption>
+            <caption> Informacion productiva de la empresa</caption>
             <thead>
-               <th>Producto</th>
-               <th>Precio de venta unitario</th>
-               <th>Costo variable unitario</th>
-               <th>Participacion en ventas</th>
+               <th>dias laborados anualmente</th>
+               <th>Jornada diaria</th>
+               <th>Jornada real de trabajo diario</th>
+
                <th colspan = "2"></th>
             </thead>
             <tbody>
@@ -57,7 +55,7 @@
                   <td>{{p.nombre}}</td>
                   <td>{{p.p_v_u}}</td>
                   <td>{{p.c_v_u}}</td>
-                  <td>{{p.participacion_ventas}}</td>
+
                   <td><a href = "{% url 'editar_producto' p.id %}" class= "btn btn-info">Editar</a></td>
                   <td><a href = "{% url 'eliminar_producto' p.id %}" class= "btn btn-danger">Eliminar</a></td>
                   </tr>
@@ -69,11 +67,5 @@
    </div>
    
 
-
 </div>
-
-
-
-   
-
 {% endblock %}
