@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block title %} Inicio {% endblock %}
+
+{% block contenido %}
+
+<div class="row">
+
+   <div class = "col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-4">
+      <h5><strong>Editar Producto {{producto.nombre}}</strong></h5> 
+         <div class ="card">
+            <div class= "card-body">
+               <form action=" {% url 'editar_producto' producto.id %}" method = "POST">
+                  
+                  {% csrf_token %} 
+                  <div class = "form-group mb-3">
+                     {{form.nombre}}
+                  </div>
+                  <div class = "form-group mb-3">
+                     {{form.p_v_u}}
+                  </div>
+                  <div class = "form-group mb-3">
+                     {%if tipoEmpresa == 'comerciante'%}
+                     {{form.c_v_u}}
+                     {% endif %}
+                  </div>
+   
+                  <div class="form-group mb-3">
+                     {{form.participacion_ventas}}
+                  </div>
+   
+                  <div class = "form-group">
+                     <button type= "submit" class= "btn btn-success btn-block text-white">Editar Producto</button>
+                  </div>  
+               </form> 
+            </div>
+         </div>
+      
+      </div>
+
+
+   {%if tipoEmpresa == 'productor'%}
+
+   <div class = "col-sm-12 col-md-6 col-lg-4 col-xl-4 ">
+      <h5><strong>Añadir concepto de costo</strong></h5> 
+         <div class ="card">
+            <div class= "card-body">
+               <form action="{% url 'añadir_concepto' producto.id %}" method = "POST">
+                  
+                  {% csrf_token %} 
+                  <div class = "form-group mb-3">
+                     {{formConcepto.nombreConcepto}}
+                  </div>
+                  <div class = "form-group mb-3">
+                     {{formConcepto.unidad_compra}}
+                  </div>
+                  <div class = "form-group mb-3">
+                     {{formConcepto.precio_compra}}
+                  </div>
+   
+                  <div class="form-group mb-3">
+                     {{formConcepto.unidad_ultilizada}}
+                  </div>
+
+                  <div class="form-group mb-3">
+                     {{formConcepto.factor}}
+                  </div>
+
+                  <div class="form-group mb-3">
+                     {{formConcepto.costo_variable}}
+                  </div>
+   
+                  <div class = "form-group">
+                     <button type= "submit" class= "btn btn-success btn-block text-white">Añadir concepto</button>
+                  </div>  
+               </form> 
+            </div>
+         </div>
+      
+      </div>
+</div>
+
+{% endif %}
+
+{%if tipoEmpresa == 'productor'%}
+
+   <div class = "col-sm-12 col-md-6 col-lg-8 col-xl-8 ">
+      <h3><strong>Conceptos</strong></h3>
+      <div class = "table-responsive py-2 " style="width: 80vw">
+         <table style class = "table table-striped" >
+            <thead>
+               <th>Concepto</th>
+               <th>Unidad de Compra</th>
+               <th>Precio de compra</th>
+               <th>Unidades ultilizadas</th>
+               <th>Factor</th>  
+               <th>Costo variable</th>  
+            </thead>
+            <tbody>
+               <ul>
+                  {% for c in conceptos %}
+                  <tr>
+                  
+                  <td>{{c.nombreConcepto}}</td>
+                  <td>{{c.unidad_compra}}</td>
+                  <td>{{c.precio_compra}}</td>
+                  <td>{{c.unidad_ultilizada}}</td>
+                  <td>{{c.factor}}</td>
+                  <td>{{c.costo_variable}}</td>
+                  <td><a href = "{% url 'eliminar_concepto' c.id %}" class= "btn btn-danger">Eliminar</a></td>
+                  </tr>
+   
+                  {% endfor%}
+               </ul> 
+            </tbody>
+         </table>
+      </div>
+   </div>
+
+{% endif %}
+   
+
+
+</div>
+
+{% endblock %}

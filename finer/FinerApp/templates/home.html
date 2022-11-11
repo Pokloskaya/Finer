@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finer</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'Home.css'%}"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <section class="header">
+            <nav>
+                <div class="nav-links" id="navLinks">
+                    <ul>
+                        <li> <button><a href="{% url 'registro' %}">Registrase</a></button> </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="text-box">
+
+                <h1>Bienvenido, usuario!</h1>
+                <p>
+                    En Finer puedes tener todas tus finanzas organizadas <br> ;)
+        
+                </p>
+                <a href="{% url 'gestion_producto'  %}" class="hero-btn"> Productos</a>
+                <a href="{% url 'indicadores'  %}" class="hero-btn"> Indicadores financieros</a>
+                <a href="{% url 'costos_fijos' %}" class="hero-btn"> Costos fijos </a>
+            </div>
+
+        </section>
+</body>
+</html>
