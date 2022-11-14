@@ -1,7 +1,7 @@
 from re import A
 from django.shortcuts import render, redirect,HttpResponseRedirect
 from .models import Empresa, Producto,Concepto, Costos, Cfu
-from .forms import FormEmpresa,FormCostos,FormConcepto,FormProducto, FormCfu
+from .forms import FormEmpresa,FormCostos,FormConcepto,FormProducto, FormCfu, FormUtilidad
 
 def home(request):
    return render(request, "home.html")
@@ -39,7 +39,26 @@ def gestion_producto(request,empresa_id=2):
 
    return render(request, "gestion_producto.html", {"productos": productos,'form':form,'tipoEmpresa':Empresa.objects.get(id=empresa_id).tipo_empresa})
 
-#----------------------------------------------------------------------------------------------------
+#---------INDICADORES-----------------------------------------------------------------------------------------
+
+def calcularUtilidad(request):
+   resultadoFinal = 0
+   if request.method == 'POST':
+        
+      formm = FormUtilidad(request.POST)
+      form = FormCfu(request.POST)
+      form = FormCfu()
+
+      if formm.is_valid():
+             
+         costo = formm.cleaned_data["costo"]
+         utilidad = formm.cleaned_data["utilidad"]
+      
+      resultadoFinal = (100*costo)/(100-utilidad)
+
+   return render(request, "indicadores.html", {'form':form, "resultadoFinal": resultadoFinal})
+      
+   
 
 def obtenerDiasLaborados():
        
@@ -72,9 +91,10 @@ def indicadores(request):
          
 
    form = FormCfu()
+   formm = FormUtilidad()
    diasTrabajados = obtenerDiasLaborados()
-
-   return render(request, "indicadores.html", {'prueba':diasTrabajados, 'form':form})
+   Cfus = Cfu.objects.filter()
+   return render(request, "indicadores.html", {"Cfus": Cfus,'prueba':diasTrabajados, 'form':form,'formm':formm})
 
 #----------------------------------------------------------------------------------------------------------------------
 
@@ -106,8 +126,8 @@ def editar_producto(request,producto_id,empresa_id=1):
          formConcepto = FormConcepto()            
          data['conceptos'] = conceptos
          data['formConcepto'] = formConcepto
-      
-      
+
+         
    elif request.method == 'POST':
     
       form = FormProducto(request.POST)

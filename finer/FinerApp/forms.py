@@ -1,5 +1,4 @@
 import imp
-# from django.contrib import admin
 
 from .models import Producto,Concepto,Costos,Empresa, Cfu
 from django import forms
@@ -111,3 +110,10 @@ class FormCfu(forms.ModelForm):
             'jornadaDiara':forms.TextInput(attrs={'class':'form-control','placeholder':labels['jornadaDiara']}),
             'empleadosParticipacion':forms.TextInput(attrs={'class':'form-control','placeholder':labels['empleadosParticipacion']}),
          }
+
+class FormUtilidad(forms.Form):
+   costo = forms.DecimalField(label = 'costo')
+   utilidad = forms.DecimalField(label = 'utilidad')
+
+   
+   

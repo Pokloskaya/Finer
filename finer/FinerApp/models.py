@@ -39,3 +39,4 @@ class Cfu(models.Model):
    diasLaboradosAnuales = models.DecimalField(max_digits=10,decimal_places=1)
    jornadaDiara = models.DecimalField(max_digits=10,decimal_places=1)
    empleadosParticipacion = models.DecimalField(max_digits=10,decimal_places=1)   
+
