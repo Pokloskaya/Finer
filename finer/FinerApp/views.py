@@ -48,6 +48,8 @@ def calcularUtilidad(request):
       formm = FormUtilidad(request.POST)
       form = FormCfu(request.POST)
       form = FormCfu()
+      Cfus = Cfu.objects.filter()
+      diasTrabajados = obtenerDiasLaborados()
 
       if formm.is_valid():
              
@@ -56,10 +58,8 @@ def calcularUtilidad(request):
       
       resultadoFinal = (100*costo)/(100-utilidad)
 
-   return render(request, "indicadores.html", {'form':form, "resultadoFinal": resultadoFinal})
+   return render(request, "indicadores.html", {'prueba':diasTrabajados,'Cfus': Cfus,'form':form, "resultadoFinal": resultadoFinal})
       
-   
-
 def obtenerDiasLaborados():
        
    consultaDiasTrabajados = Cfu.objects.values_list('diasLaboradosAnuales', flat=True)

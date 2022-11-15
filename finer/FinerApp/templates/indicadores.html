@@ -7,8 +7,8 @@
    <h5><strong>CALCULAR COSTOS FIJOS UNITARIOS</strong></h5> 
       <div class ="card">
          <div class= "card-body">
+
             <form action="" method = "POST">
-               
                {% csrf_token %} 
                <div class = "form-group mb-3">
                   {{form.diasLaboradosAnuales}}
@@ -25,12 +25,12 @@
                </div>  
 
                <div>
-                <h5>
-                  Valor por minuto de trabajo: {{prueba}}
-                </h5>
-              </div>
-
+                  <h5>
+                     Valor por minuto de trabajo: {{prueba}}
+                  </h5>
+               </div>
             </form> 
+
          </div>
       </div>
    </div>
@@ -42,8 +42,7 @@
             <div class= "card-body">
 
 
-               <form action="/indicadores/calcularUtilidad" method = "POST">
-                  
+               <form action="/indicadores/calcularUtilidad" method = "POST">  
                   {% csrf_token %} 
                   <!-- {{formm}} -->
 
@@ -59,8 +58,8 @@
                      <button type= "submit" class= "btn btn-success btn-block text-white">Calcular</button>
                   </div>  
 
-                  <div class = "form-group">
-                     <button type= "" class= "btn btn-success btn-block text-white">Regresar</button>
+                  <div class = "">
+                     <td><a href = "{% url 'indicadores' %}" class= "btn btn-success btn-block text-white">Regresar</a></td>
                   </div>  
                   
                   <div>
@@ -68,9 +67,7 @@
                        Resultado: $ {{resultadoFinal}}
                      </h5>
                   </div>
-
                </form> 
-
 
             </div>
          </div>
@@ -85,7 +82,6 @@
                <th>dias laborados anualmente</th>
                <th>Jornada diaria</th>
                <th>Jornada real de trabajo diario</th>
-
                <th colspan = "2"></th>
             </thead>
             <tbody>
@@ -96,8 +92,8 @@
                   <td>{{p.jornadaDiara}}</td>
                   <td>{{p.empleadosParticipacion}}</td>
 
-                  <td><a href = "{% url 'editar_producto' p.id %}" class= "btn btn-info">Editar</a></td>
-                  <td><a href = "{% url 'eliminar_producto' p.id %}" class= "btn btn-danger">Eliminar</a></td>
+                  <td><a href = "" class= "btn btn-info">Editar</a></td>
+                  <td><a href = "" class= "btn btn-danger">Eliminar</a></td>
                   </tr>
                   {% endfor%}
                </ul> 
@@ -105,7 +101,6 @@
          </table>
       </div>
    </div>
-   
    
 
 </div>
