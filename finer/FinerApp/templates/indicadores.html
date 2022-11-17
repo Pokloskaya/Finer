@@ -35,6 +35,35 @@
       </div>
    </div>
 
+   <div class = "col-sm-12 col-md-6 col-lg-8 col-xl-8">
+      <h3><strong>Informacion productiva de la empresa</strong></h3>
+      <div class = "table-responsive py-2 ">
+         <table class = "table table-striped" >
+            <caption> Informacion productiva de la empresa</caption>
+            <thead>
+               <th>dias laborados anualmente</th>
+               <th>Jornada diaria</th>
+               <th>Jornada real de trabajo diario</th>
+               <th colspan = "2"></th>
+            </thead>
+            <tbody>
+               <ul>
+                  {% for p in Cfus %}
+                  <tr>
+                  <td>{{p.diasLaboradosAnuales}}</td>
+                  <td>{{p.jornadaDiara}}</td>
+                  <td>{{p.empleadosParticipacion}}</td>
+
+                  <td><a href = "" class= "btn btn-info">Editar</a></td>
+                  <td><a href = "" class= "btn btn-danger">Eliminar</a></td>
+                  </tr>
+                  {% endfor%}
+               </ul> 
+            </tbody>
+         </table>
+      </div>
+   </div>
+
    <div class = "row">
       <div class = "col-sm-12 col-md-6 col-lg-4 col-xl-4 ">
       <h5><strong>UTILIDAD ESPERADA POR EL PRODUCTO</strong></h5> 
@@ -74,7 +103,7 @@
       </div>
 
    <div class = "col-sm-12 col-md-6 col-lg-8 col-xl-8">
-      <h3><strong>Informacion productiva de la empresa</strong></h3>
+      <h3><strong>Indicadores</strong></h3>
       <div class = "table-responsive py-2 ">
          <table class = "table table-striped" >
             <caption> Informacion productiva de la empresa</caption>
@@ -101,6 +130,43 @@
          </table>
       </div>
    </div>
+
+   <div>
+      ㅤ
+   </div>
+   <div>
+      ㅤ
+   </div>
+
+   <div class = "col-sm-12 col-md-6 col-lg-8 col-xl-8">
+      <h3><strong>Punto de equilibrio</strong></h3>
+      <div class = "table-responsive py-2 ">
+         <table class = "table table-striped" >
+            <caption> aqui tiene que ir todo lo referente al punto de equilibrio </caption>
+            <thead>
+               <th>dias laborados anualmente</th>
+               <th>Jornada diaria</th>
+               <th>Jornada real de trabajo diario</th>
+               <th colspan = "2"></th>
+            </thead>
+            <tbody>
+               <ul>
+                  {% for p in Cfus %}
+                  <tr>
+                  <td>{{p.diasLaboradosAnuales}}</td>
+                  <td>{{p.jornadaDiara}}</td>
+                  <td>{{p.empleadosParticipacion}}</td>
+
+                  <td><a href = "" class= "btn btn-info">Editar</a></td>
+                  <td><a href = "" class= "btn btn-danger">Eliminar</a></td>
+                  </tr>
+                  {% endfor%}
+               </ul> 
+            </tbody>
+         </table>
+      </div>
+   </div>
+   
    
 
 </div>
