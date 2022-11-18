@@ -6,6 +6,9 @@ from .forms import FormEmpresa,FormCostos,FormConcepto,FormProducto, FormCfu, Fo
 def home(request):
    return render(request, "home.html")
 
+def pagina_principal(request):
+   return render(request, "pagina_principal.html")
+
 #Empresa_id = 1 es una empresa productora
 #Empresa_id = 2 es una empresa comerciante
 def gestion_producto(request,empresa_id=2):
