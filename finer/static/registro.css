@@ -13,7 +13,7 @@
 body {
     align-items: center;
     /* background-color: #000; */
-    background-image: linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)), url(fondo.png);
+    background-image: linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)), url(images/fondo.png);
     display: flex;
     justify-content: center;
     height: 100vh;

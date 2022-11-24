@@ -19,14 +19,14 @@ section{
 }
 
 .red{
-    background: red;
+    background: rgba(235, 6, 6, 0.926);
 }
 
 .pink{
     background: #ff0066;
 }
 
-.red{
+.dark{
     background: #0f0f10;
 }
 
