@@ -90,11 +90,6 @@ nav img{
     transition: 1s;
 }
 
-
-nav .fa{ /*Para que los iconos solo se vean para las pantallas pequenias*/ 
-    display: none;
-}
-
 /*Hacer que se vea bien la clase text box en dispositivos pequenios*/ 
 @media(max-width: 700px){
     .text-box h1{
